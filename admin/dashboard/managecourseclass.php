@@ -1,6 +1,6 @@
-
 <div class="container-fluid mt-5">
-    <h2 class="mb-4">จัดการข้อมูล ผลการเรียน</h2>
+    <h2 class="mb-4">Class Management System</h2>
+    <button class="btn btn-primary mb-3" id="addClassStudentBtn">Class Student</button>
     <div class="table-responsive">
       <table id="courseTable" class="table">
           <thead>
@@ -9,7 +9,8 @@
                   <th>Year</th>
                   <th>Term</th>
                   <th>Student Number</th>
-                  <th>Update</th>
+                  <th>Detail</th>
+                  <th>Edit</th>
               </tr>
           </thead>
           <tbody>
@@ -60,7 +61,7 @@
 </div>
 <!-- Create Class Modal -->
 <div class="modal fade" id="DetailClassModal" tabindex="-1" aria-labelledby="DetailClassModalLabel" aria-hidden="true">
-   <div class="modal-dialog  modal-xl">
+   <div class="modal-dialog">
        <div class="modal-content">
            <div class="modal-header">
                <h5 class="modal-title" id="DetailClassModalLabel">Detail Class</h5>
@@ -84,17 +85,7 @@
                    <td id="Class_Term"> </td>
                  </tr>
                  <tr>
-                   <td colspan="2" >
-                     <div class="container-fluid">
-                      <div class="row">
-                        <div class="col-4" id="stu_list">
-
-                        </div>
-                        <div class="col-8" id="sub_list">
-
-                        </div>
-                      </div>
-                    </div>
+                   <td colspan="2" id="stu_list">
                    </td>
                  </tr>
                </tbody>
@@ -118,7 +109,13 @@
             {
                 data: null,
                 render: function(data, type, row) {
-                    return  '<button type="button" class="btn btn-warning btn-sm" onclick="function_CourseDetail(' + row.course_id + ','+ row.term +')"    >update</button>';
+                    return  '<button type="button" class="btn btn-success btn-sm" onclick="function_CourseDetail(' + row.course_id + ','+ row.term +')"    >Detail</button>';
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    return  '<button type="button" class="btn btn-warning btn-sm" onclick="function_editCourseDetail(' + row.course_id + ','+ row.term +')"    >Edit</button>';
                 }
             }
         ]
@@ -239,9 +236,9 @@
             $("#Class_Name").html(course_data['data'][0]['course_name']);
             $("#Class_Year").html(course_data['data'][0]['course_year']);
             $("#Class_Term").html(course_data['data'][0]['term']);
-            var text = 'Student List <hr><ul>';
+            var text = '<ul>';
             for (var i = 0; i < course_data['data'].length; i++) {
-                text += '<li><a href="#" onclick="function_update_g('+course_data['data'][i]['student_id']+','+course_data['data'][0]['term']+','+course_data['data'][0]['course_id']+');">  '+course_data['data'][i]['first_name']+' '+course_data['data'][i]['last_name']+'</a></li>';
+                text += '<li>'+course_data['data'][i]['first_name']+' '+course_data['data'][i]['last_name']+'</li>';
             }
             text += '</ul>';
             $("#stu_list").html(text);
@@ -299,53 +296,6 @@
     get_courses_id(course_id);
     get_stu_id(course_id,term);
     $("#Class_id").val('update');
-    $("#createClassModal").modal("show");
-  }
-
-  function function_update_g(student_id,term,course_id) {
-    //$("#sub_list").html(stu_id);
-    $.ajax({
-        url: 'actions/get_list_courses.php',
-        type: 'POST',
-        data: { student_id:student_id,term:term,course_id: course_id},
-        success: function(data) {
-            $("#sub_list").html(data);
-        }
-    });
-  }
-  function function_saveg(student_id,course_id,term) {
-    var nulls = 0;
-    var subjects = [];
-    var subjects_id = [];
-    var len = $('input[name="subjects[]"]').valueOf().length
-    for (var i = 0; i < len; i++) {
-      var value = $('input[name="subjects[]"]').valueOf()[i]['value'];
-      var id = $('input[name="subjects[]"]').valueOf()[i]['id'];
-      if (value=='') {
-        nulls++;
-      }else {
-        subjects.push(value);
-        subjects_id.push(id);
-      }
-    }
-    if (nulls>0) {
-      alert('Error กรอกคะแนนให้ครบทุกวิชา');
-    }else {
-      $.ajax({
-          url: 'actions/action_g.php',
-          type: 'POST',
-          data: { student_id:student_id,course_id:course_id,term:term,subjects:subjects,subjects_id:subjects_id},
-          success: function(response) {
-              // Handle success response
-              alert(' successfully!');
-              // Optionally, you can redirect user to a success page or display a success message
-          },
-          error: function(xhr, status, error) {
-              // Handle error response
-              alert('Error  course:', error);
-              // Optionally, display an error message to the user
-          }
-      });
-    }
+   $("#createClassModal").modal("show");
   }
 </script>
