@@ -1,16 +1,16 @@
 <div class="container-fluid mt-5">
-    <h2 class="mb-4">Class Management System</h2>
-    <button class="btn btn-primary mb-3" id="addClassStudentBtn">Class Student</button>
+    <h2 class="mb-4">จัดการข้อมูล กลุ่มชั้นเรียน</h2>
+    <button class="btn btn-primary mb-3" id="addClassStudentBtn">เพิ่มข้อมูล</button>
     <div class="table-responsive">
       <table id="courseTable" class="table">
           <thead>
               <tr>
-                  <th>Name</th>
-                  <th>Year</th>
-                  <th>Term</th>
-                  <th>Student Number</th>
-                  <th>Detail</th>
-                  <th>Edit</th>
+                  <th>ชื่อกลุ่ม</th>
+                  <th>ปี</th>
+                  <th>เทอม</th>
+                  <th>จำนวนนักเรียน</th>
+                  <th>รายละเอียด</th>
+                  <th>แก้ไข</th>
               </tr>
           </thead>
           <tbody>
@@ -26,7 +26,7 @@
    <div class="modal-dialog">
        <div class="modal-content">
            <div class="modal-header">
-               <h5 class="modal-title" id="createClassModalLabel">Create Class</h5>
+               <h5 class="modal-title" id="createClassModalLabel">ข้อมูล</h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                </button>
@@ -34,26 +34,26 @@
            <div class="modal-body">
               <form  id="createCourseClassForm" method="POST">
                    <div class="form-group">
-                       <label for="course_id">Course Name:</label>
+                       <label for="course_id">ชื่อกลุ่ม:</label>
                        <input type="hidden" id="Class_id" name="Class_id">
                        <select id="course_id" name="course_id" class="form-control">
                            <!-- Options will be populated dynamically -->
                        </select>
                    </div>
                    <div class="form-group" >
-                       <label for="course_id">Course Term:</label>
+                       <label for="course_id">ปี:</label>
                        <select id="Term" name="Term" class="form-control">
                            <option value="1">1</option>
                            <option value="2">2</option>
                        </select>
                    </div>
                    <div class="form-group">
-                       <label>Students:</label><br>
+                       <label>นักเรียน:</label><br>
                        <div id="SelectStudents" style="height:540px;overflow-y: scroll;">
 
                        </div>
                    </div>
-                   <button type="submit" class="btn btn-primary">Save Class</button>
+                   <button type="submit" class="btn btn-primary">บันทึก</button>
                </form>
            </div>
        </div>
@@ -64,7 +64,7 @@
    <div class="modal-dialog">
        <div class="modal-content">
            <div class="modal-header">
-               <h5 class="modal-title" id="DetailClassModalLabel">Detail Class</h5>
+               <h5 class="modal-title" id="DetailClassModalLabel">รายละเอียด</h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                </button>
@@ -73,15 +73,15 @@
              <table class="table table-bordered">
                <tbody>
                  <tr>
-                   <td width="30%">Class Name</td>
+                   <td width="30%">ชื่อกลุ่ม</td>
                    <td id="Class_Name"></td>
                  </tr>
                  <tr>
-                   <td width="30%">Class Year</td>
+                   <td width="30%">ปี</td>
                    <td id="Class_Year"> </td>
                  </tr>
                  <tr>
-                   <td width="30%">Class Term</td>
+                   <td width="30%">เทอม</td>
                    <td id="Class_Term"> </td>
                  </tr>
                  <tr>
@@ -109,13 +109,13 @@
             {
                 data: null,
                 render: function(data, type, row) {
-                    return  '<button type="button" class="btn btn-success btn-sm" onclick="function_CourseDetail(' + row.course_id + ','+ row.term +')"    >Detail</button>';
+                    return  '<button type="button" class="btn btn-success btn-sm" onclick="function_CourseDetail(' + row.course_id + ','+ row.term +')"    >รายละเอียด</button>';
                 }
             },
             {
                 data: null,
                 render: function(data, type, row) {
-                    return  '<button type="button" class="btn btn-warning btn-sm" onclick="function_editCourseDetail(' + row.course_id + ','+ row.term +')"    >Edit</button>';
+                    return  '<button type="button" class="btn btn-warning btn-sm" onclick="function_editCourseDetail(' + row.course_id + ','+ row.term +')"    >แก้ไข</button>';
                 }
             }
         ]

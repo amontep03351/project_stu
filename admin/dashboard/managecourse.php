@@ -1,15 +1,15 @@
 <div class="container-fluid mt-5">
-    <h2 class="mb-4">Course Management System</h2>
-    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addCourseModal">Add Course</button>
+    <h2 class="mb-4">จัดการข้อมูล คอร์สเรียน</h2>
+    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addCourseModal">เพิ่มข้อมูล</button>
     <div class="table-responsive">
       <table id="courseTable" class="table">
           <thead>
               <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Year</th>
-                  <th>Action</th>
-                  <th>Detail</th>
+                  <th>ไอดี</th>
+                  <th>ชื่อคอร์ส</th>
+                  <th>ปี</th>
+                  <th>จัดการ</th>
+                  <th>รายละเอียด</th>
               </tr>
           </thead>
           <tbody>
@@ -24,7 +24,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addCourseModalLabel">Add Course</h5>
+                <h5 class="modal-title" id="addCourseModalLabel">ข้อมูล</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -34,18 +34,18 @@
                 <form id="courseForm">
                     <input type="hidden" id="courseId" name="courseId">
                     <div class="form-group">
-                        <label for="courseName">Course Name</label>
+                        <label for="courseName">ชื่อคอร์ส</label>
                         <input type="text" class="form-control" id="courseName" name="courseName" required>
                     </div>
                     <div class="form-group">
-                        <label for="courseYear">Course Year</label>
+                        <label for="courseYear">ปี</label>
                         <input type="text" class="form-control"  id="courseYear" name="courseYear" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" id="saveCourseBtn">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                <button type="submit" class="btn btn-primary" id="saveCourseBtn">บันทึก</button>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createCourseModalLabel">Course Detail</h5>
+                <h5 class="modal-title" id="createCourseModalLabel">ข้อมูล</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -63,22 +63,22 @@
             <div class="modal-body">
                 <form  id="createCourseForm" method="POST">
                     <div class="form-group">
-                        <label for="course_name">Course Name:</label>
+                        <label for="course_name">ชื่อคอร์ส:</label>
                         <input type="text" class="form-control" id="course_name" name="course_name" readonly>
                         <input type="hidden" class="form-control" id="course_id" name="course_id"  >
                     </div>
                     <div class="form-group">
-                      <label for="course_year">Course Year</label>
+                      <label for="course_year">ปี</label>
                       <input type="text" class="form-control"  id="course_year" name="course_year" readonly>
                     </div>
                     <div class="form-group">
-                        <label>Select Subjects:</label><br>
+                        <label>รายวิชาในคอร์ส:</label><br>
                         <div id="SelectSubjects">
 
                         </div>
 
                     </div>
-                    <button type="submit" class="btn btn-primary">update Course</button>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
                 </form>
             </div>
         </div>
@@ -113,13 +113,13 @@
             {
                 data: null,
                 render: function(data, type, row) {
-                    return '<button type="button" class="btn btn-info btn-sm" onclick="function_editCourse(' + row.course_id + ')"    >Edit</button>';
+                    return '<button type="button" class="btn btn-info btn-sm" onclick="function_editCourse(' + row.course_id + ')"    >แก้ไข</button>';
                 }
             },
             {
                 data: null,
                 render: function(data, type, row) {
-                    return  '<button type="button" class="btn btn-success btn-sm" onclick="function_CourseDetail(' + row.course_id + ')"    >Detail</button>';
+                    return  '<button type="button" class="btn btn-success btn-sm" onclick="function_CourseDetail(' + row.course_id + ')"    >รายละเอียด</button>';
                 }
             }
         ]

@@ -16,32 +16,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get user input
     $username = $_POST["username"];
     $password = $_POST["password"];
+    if (isset($_POST["stucheck"])) {
+      // SQL query to fetch user details
+      $sql = "SELECT student_id , email, student_password FROM student WHERE email = ?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("s", $username);
+      $stmt->execute();
+      $stmt->store_result();
 
-    // SQL query to fetch user details
-    $sql = "SELECT user_id, user_username, user_password FROM users WHERE user_username = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
+      // Check if a user with the provided username exists
+      if ($stmt->num_rows > 0) {
+          $stmt->bind_result($student_id, $email, $student_password);
+          $stmt->fetch();
 
-    // Check if a user with the provided username exists
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($userId, $dbUsername, $dbPassword);
-        $stmt->fetch();
+          // Verify the entered password against the hashed password in the database
+          if ($password == $student_password) {
+              $_SESSION['student_id'] = $student_id;
+              $_SESSION['email'] = $email;
+              header( "Location: loginsuccessful.html" );
+              // You can set session variables or redirect the user to a dashboard here.
+          } else {
+              header( "Location: incorrectpassword.html" );
+          }
+      } else {
 
-        // Verify the entered password against the hashed password in the database
-        if (verifyPassword($password, $dbPassword)) {
-            $_SESSION['userId'] = $userId;
-            $_SESSION['Username'] = $dbUsername;
-            header( "Location: loginsuccessful.html" );
-            // You can set session variables or redirect the user to a dashboard here.
-        } else {
-            header( "Location: incorrectpassword.html" );
-        }
-    } else {
+          header( "Location: Usernotfound.html" );
+      }
 
-        header( "Location: Usernotfound.html" );
+    }else {
+      // SQL query to fetch user details
+      $sql = "SELECT user_id, user_username, user_password FROM users WHERE user_username = ?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("s", $username);
+      $stmt->execute();
+      $stmt->store_result();
+
+      // Check if a user with the provided username exists
+      if ($stmt->num_rows > 0) {
+          $stmt->bind_result($userId, $dbUsername, $dbPassword);
+          $stmt->fetch();
+
+          // Verify the entered password against the hashed password in the database
+          if (verifyPassword($password, $dbPassword)) {
+              $_SESSION['userId'] = $userId;
+              $_SESSION['Username'] = $dbUsername;
+              header( "Location: loginsuccessful.html" );
+              // You can set session variables or redirect the user to a dashboard here.
+          } else {
+              header( "Location: incorrectpassword.html" );
+          }
+      } else {
+
+          header( "Location: Usernotfound.html" );
+      }
     }
+
 
     $stmt->close();
 }

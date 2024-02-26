@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 09, 2024 at 10:05 AM
+-- Generation Time: Feb 26, 2024 at 04:00 AM
 -- Server version: 5.7.36
 -- PHP Version: 8.1.3
 
@@ -34,7 +34,7 @@ CREATE TABLE `academicresults` (
   `subject_id` int(11) NOT NULL,
   `subject` varchar(100) DEFAULT NULL,
   `score` float DEFAULT NULL,
-  `grade` char(2) DEFAULT NULL,
+  `grade` float DEFAULT NULL,
   `year` int(11) DEFAULT NULL,
   `term` enum('1','2') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -44,8 +44,8 @@ CREATE TABLE `academicresults` (
 --
 
 INSERT INTO `academicresults` (`result_id`, `student_id`, `course_id`, `subject_id`, `subject`, `score`, `grade`, `year`, `term`) VALUES
-(1, 7, 1, 1, 'ภาษาไทย', 77, 'B+', 24, '1'),
-(2, 7, 1, 2, 'Eng', 60, 'C', 24, '1');
+(3, 7, 1, 1, 'ภาษาไทย', 77, 3.5, 24, '1'),
+(4, 7, 1, 2, 'Eng', 77, 3.5, 24, '1');
 
 -- --------------------------------------------------------
 
@@ -120,6 +120,7 @@ CREATE TABLE `student` (
   `date_of_birth` date DEFAULT NULL,
   `gender` enum('Male','Female','Other') DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `student_password` varchar(50) NOT NULL,
   `phone_number` varchar(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -128,9 +129,9 @@ CREATE TABLE `student` (
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`student_id`, `first_name`, `last_name`, `date_of_birth`, `gender`, `email`, `phone_number`, `address`) VALUES
-(7, 'Amontep', 'Phaochu', '2024-02-07', 'Female', 'mos03351@gmail.com', '0949684168', 'Rattanathibet Road'),
-(8, 'sirada', 'maylove', '2024-02-09', 'Male', 'sirada.maylove@gmail.com', '0949684168', 'Rattanathibet Road');
+INSERT INTO `student` (`student_id`, `first_name`, `last_name`, `date_of_birth`, `gender`, `email`, `student_password`, `phone_number`, `address`) VALUES
+(7, 'Amontep', 'Phaochu', '2024-02-07', 'Female', 'mos03351@gmail.com', '1234', '0949684168', 'Rattanathibet Road'),
+(8, 'sirada', 'maylove', '2024-02-09', 'Male', 'sirada.maylove@gmail.com', '1234', '0949684168', 'Rattanathibet Road');
 
 -- --------------------------------------------------------
 
@@ -152,7 +153,8 @@ CREATE TABLE `subjects` (
 
 INSERT INTO `subjects` (`subject_id`, `subject_name`, `subject_code`, `subject_credit`, `subject_description`) VALUES
 (1, 'ภาษาไทย', '00123', 4, 'testss'),
-(2, 'Eng', '00333', 3, 'asdasd');
+(2, 'Eng', '00333', 3, 'asdasd'),
+(3, 'ภาษาไทย', '12313', 2, 'ภาษาไทย');
 
 -- --------------------------------------------------------
 
@@ -228,7 +230,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `academicresults`
 --
 ALTER TABLE `academicresults`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `course`
@@ -258,7 +260,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

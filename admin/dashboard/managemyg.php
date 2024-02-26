@@ -1,6 +1,6 @@
 
 <div class="container-fluid mt-5">
-    <h2 class="mb-4">จัดการข้อมูล ผลการเรียน</h2>
+    <h2 class="mb-4"> ผลการเรียน</h2>
     <div class="table-responsive">
       <table id="courseTable" class="table">
           <thead>
@@ -8,8 +8,7 @@
                   <th>ชั้นเรียน</th>
                   <th>ปี</th>
                   <th>เทอม</th>
-                  <th>จำนวนนักเรียน</th>
-                  <th>จัดการ</th>
+                  <th>ดูผลการเรียน</th>
               </tr>
           </thead>
           <tbody>
@@ -114,11 +113,10 @@
             { data: 'course_name' },
             { data: 'course_year' },
             { data: 'term' },
-            { data: 'count_stuclass' },
             {
                 data: null,
                 render: function(data, type, row) {
-                    return  '<button type="button" class="btn btn-warning btn-sm" onclick="function_CourseDetail(' + row.course_id + ','+ row.term +')"    >update</button>';
+                    return  '<button type="button" class="btn btn-warning btn-sm" onclick="function_CourseDetail(' + row.course_id + ','+ row.term +')"    >ดู</button>';
                 }
             }
         ]
@@ -231,7 +229,7 @@
   function function_CourseDetail(course_id,term) {
     $('#DetailClassModal').modal("show");
     $.ajax({
-        url: 'actions/get_classcourses.php',
+        url: 'actions/get_My_classcourses.php',
         type: 'POST',
         data: { id: course_id,term:term },
         success: function(data) {
@@ -305,7 +303,7 @@
   function function_update_g(student_id,term,course_id) {
     //$("#sub_list").html(stu_id);
     $.ajax({
-        url: 'actions/get_list_courses.php',
+        url: 'actions/get_Mylist_courses.php',
         type: 'POST',
         data: { student_id:student_id,term:term,course_id: course_id},
         success: function(data) {

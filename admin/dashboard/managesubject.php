@@ -1,18 +1,18 @@
 
 <div class="container-fluid mt-5">
-    <h2>Subjects Management</h2>
+    <h2>จัดการข้อมูล รายวิชา</h2>
     <hr>
-    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addSubjectModal">Add Subject</button>
+    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addSubjectModal">เพิ่มข้อมูล</button>
     <div class="table-responsive">
       <table id="subjectTable" class="table table-striped">
           <thead>
               <tr>
-                  <th>Subject ID</th>
-                  <th>Subject Name</th>
-                  <th>Subject Code</th>
-                  <th>Credit</th>
-                  <th>Description</th>
-                  <th>Actions</th>
+                  <th>ไอดี</th>
+                  <th>ชื่อวิชา</th>
+                  <th>รหัสวิชา</th>
+                  <th>หน่วยกิต</th>
+                  <th>คำอธิบาย</th>
+                  <th>จัดการ</th>
               </tr>
           </thead>
           <tbody>
@@ -27,7 +27,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addSubjectModalLabel">Add Subject</h5>
+                <h5 class="modal-title" id="addSubjectModalLabel">ข้อมูล</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -35,22 +35,22 @@
             <div class="modal-body">
                 <form id="addSubjectForm">
                     <div class="form-group">
-                        <label for="subjectName">Subject Name</label>
+                        <label for="subjectName">ชื่อวิชา</label>
                         <input type="text" class="form-control" id="subjectName" name="subjectName" required>
                     </div>
                     <div class="form-group">
-                        <label for="subjectCode">Subject Code</label>
+                        <label for="subjectCode">รหัสวิชา</label>
                         <input type="text" class="form-control" id="subjectCode" name="subjectCode" required>
                     </div>
                     <div class="form-group">
-                        <label for="subjectCredit">Subject Credit</label>
+                        <label for="subjectCredit">หน่วยกิต</label>
                         <input type="number" class="form-control" id="subjectCredit" name="subjectCredit" required>
                     </div>
                     <div class="form-group">
-                        <label for="subjectDescription">Subject Description</label>
+                        <label for="subjectDescription">คำอธิบาย</label>
                         <textarea class="form-control" id="subjectDescription" name="subjectDescription" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Subject</button>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
                 </form>
             </div>
         </div>
@@ -61,7 +61,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editSubjectModalLabel">Edit Subject</h5>
+                <h5 class="modal-title" id="editSubjectModalLabel">ข้อมูล</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -70,22 +70,22 @@
                 <form id="editSubjectForm">
                     <input type="hidden" id="editSubjectId" name="editSubjectId">
                     <div class="form-group">
-                        <label for="editSubjectName">Subject Name</label>
+                        <label for="editSubjectName">ชื่อวิชา</label>
                         <input type="text" class="form-control" id="editSubjectName" name="editSubjectName" required>
                     </div>
                     <div class="form-group">
-                        <label for="editSubjectCode">Subject Code</label>
+                        <label for="editSubjectCode">รหัสวิชา</label>
                         <input type="text" class="form-control" id="editSubjectCode" name="editSubjectCode" required>
                     </div>
                     <div class="form-group">
-                        <label for="editSubjectCredit">Subject Credit</label>
+                        <label for="editSubjectCredit">หน่วยกิต</label>
                         <input type="number" class="form-control" id="editSubjectCredit" name="editSubjectCredit" required>
                     </div>
                     <div class="form-group">
-                        <label for="editSubjectDescription">Subject Description</label>
+                        <label for="editSubjectDescription">คำอธิบาย</label>
                         <textarea class="form-control" id="editSubjectDescription" name="editSubjectDescription" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
                 </form>
             </div>
         </div>
@@ -109,7 +109,7 @@
             {
                 data: null,
                 render: function(data, type, row) {
-                    return '<button type="button" class="btn btn-primary btn-sm editBtn" data-toggle="modal" data-target="#editSubjectModal" data-id="' + row.subject_id + '">Edit</button>';
+                    return '<button type="button" class="btn btn-primary btn-sm editBtn" data-toggle="modal" data-target="#editSubjectModal" data-id="' + row.subject_id + '">แก้ไข</button>';
                 }
             }
         ]

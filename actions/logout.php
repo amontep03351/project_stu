@@ -29,8 +29,8 @@
     </script>
 </head>
 <body>
-    <h1>Logout Successful</h1>
-    <p>You have been logged out. You will be redirected to the home page in 5 seconds.</p>
-    <p>If you are not redirected, <a href="../index.html">click here</a>.</p>
+    <h1>ออกจากระบบสำเร็จ</h1>
+    <p>คุณออกจากระบบแล้ว คุณจะถูกนำไปที่หน้าแรกภายใน 5 วินาที.</p>
+    <p>หากคุณไม่ถูกเปลี่ยนเส้นทาง, <a href="../index.html">คลิกที่นี่</a>.</p>
 </body>
 </html>

@@ -8,21 +8,21 @@ $subjects_id = $_POST["subjects_id"];
 
 function calculateGrade($score) {
     if ($score >= 80 && $score <= 100) {
-        return "A";
+        return "4";
     } elseif ($score >= 75 && $score <= 79) {
-        return "B+";
+        return "3.5";
     } elseif ($score >= 70 && $score <= 74) {
-        return "B";
+        return "3";
     } elseif ($score >= 65 && $score <= 69) {
-        return "C+";
+        return "2.5";
     } elseif ($score >= 60 && $score <= 64) {
-        return "C";
+        return "2";
     } elseif ($score >= 55 && $score <= 59) {
-        return "D+";
+        return "1.5";
     } elseif ($score >= 50 && $score <= 54) {
-        return "D";
+        return "1";
     } elseif ($score >= 0 && $score <= 49) {
-        return "F";
+        return "0";
     } else {
         return "";
     }

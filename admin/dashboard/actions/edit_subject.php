@@ -9,8 +9,8 @@ $subject_description = $_POST['editSubjectDescription'];
 
 $sql = "UPDATE subjects SET subject_name='$subject_name', subject_code='$subject_code', subject_credit=$subject_credit, subject_description='$subject_description' WHERE subject_id=$subject_id";
 if ($conn->query($sql) === TRUE) {
-    echo "success";
+    echo "สำเร็จ";
 } else {
-    echo "error";
+    echo "ไม่สำเร็จ";
 }
 ?>

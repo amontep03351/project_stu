@@ -1,19 +1,20 @@
 <div class="container-fluid mt-5">
-    <h2>Student Management System</h2>
-    <button class="btn btn-primary mb-3" id="addStudentBtn">Add Student</button>
+    <h2>จัดการข้อมูล นักเรียน</h2>
+    <button class="btn btn-primary mb-3" id="addStudentBtn">เพิ่มข้อมูล</button>
     <div class="table-responsive">
       <table id="studentTable" class="table table-striped">
           <thead>
               <tr>
-                  <th>ID</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Date of Birth</th>
-                  <th>Gender</th>
-                  <th>Email</th>
-                  <th>Phone Number</th>
-                  <th>Address</th>
-                  <th>Action</th>
+                  <th>ไอดี</th>
+                  <th>ชื่อ</th>
+                  <th>นามสกุล</th>
+                  <th>วันเดือนปีเกิด</th>
+                  <th>เพศ</th>
+                  <th>อีเมล์</th>
+                  <th>เบอร์โทร</th>
+                  <th>ที่อยู่</th>
+                  <th>จัดการ</th>
+                  <th>จัดการรหัสเข้าใช้</th>
               </tr>
           </thead>
           <tbody></tbody>
@@ -26,7 +27,7 @@
      <div class="modal-dialog">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="addStudentModalLabel">Student</h5>
+                 <h5 class="modal-title" id="addStudentModalLabel">ข้อมูล</h5>
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                  </button>
@@ -36,49 +37,76 @@
                  <!-- Form for adding student -->
                      <input type="hidden" id="studentId" name="studentId">
                      <div class="form-group">
-                         <label for="first_name">First Name</label>
+                         <label for="first_name">ชื่อ</label>
                          <input type="text" class="form-control" id="first_name" name="first_name" required>
                      </div>
                      <div class="form-group">
-                         <label for="last_name">Last Name</label>
+                         <label for="last_name">นามสกุล</label>
                          <input type="text" class="form-control" id="last_name" name="last_name" required>
                      </div>
                      <div class="form-group">
-                         <label for="date_of_birth">Date of Birth</label>
+                         <label for="date_of_birth">วันเดือนปีเกิด</label>
                          <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required>
                      </div>
                      <div class="form-group">
-                         <label for="gender">Gender</label>
+                         <label for="gender">เพศ</label>
                          <select class="form-control" id="gender" name="gender" required>
-                             <option value="Male">Male</option>
-                             <option value="Female">Female</option>
-                             <option value="Other">Other</option>
+                             <option value="Male">ชาย</option>
+                             <option value="Female">หญิง</option>
                          </select>
                      </div>
                      <div class="form-group">
-                         <label for="email">Email</label>
+                         <label for="email">อีเมล์</label>
                          <input type="email" class="form-control" id="email" name="email" required>
                      </div>
                      <div class="form-group">
-                         <label for="phone_number">Phone Number</label>
+                         <label for="phone_number">เบอร์โทร</label>
                          <input type="text" class="form-control" id="phone_number" name="phone_number" required>
                      </div>
                      <div class="form-group">
-                         <label for="address">Address</label>
+                         <label for="address">ที่อยู่</label>
                          <input type="text" class="form-control" id="address" name="address" required>
                      </div>
 
 
              </div>
              <div class="modal-footer">
-                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                 <button type="submit" class="btn btn-primary"  >Save changes</button>
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                 <button type="submit" class="btn btn-primary"  >บันทึก</button>
              </div>
              </form>
          </div>
      </div>
  </div>
+ <!-- Add Student Modal -->
+  <div class="modal fade" id="PassStudentModal" tabindex="-1" aria-labelledby="PassStudentModal" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="PassStudentModalLabel">ข้อมูลรหัสผ่าน</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <form id="PassStudentForm">
+              <div class="modal-body">
+                  <!-- Form for adding student -->
+                      <input type="hidden" id="PassstudentId" name="studentId">
+                      <div class="form-group">
+                          <label for="student_password">รหัสผ่าน</label>
+                          <input type="text" class="form-control" id="student_password" name="student_password" required>
+                      </div>
 
+
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                  <button type="submit" class="btn btn-primary"  >บันทึก</button>
+              </div>
+              </form>
+          </div>
+      </div>
+  </div>
 <script type="text/javascript">
   $(document).ready(function() {
     // Initialize DataTable
@@ -104,7 +132,13 @@
             {
                 data: null,
                 render: function(data, type, row) {
-                        return '<button type="button" class="btn btn-info btn-sm editBtn" onclick="editStudent(' + row.student_id + ')">Edit</button>';
+                        return '<button type="button" class="btn btn-info btn-sm editBtn" onclick="editStudent(' + row.student_id + ')">แก้ไข</button>';
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row) {
+                        return '<button type="button" class="btn btn-info btn-sm editBtn" onclick="editStudentPas(' + row.student_id + ')">แก้ไข</button>';
                 }
             }
         ]
@@ -151,7 +185,24 @@
             data: formData + '&action=' + action,
             success: function(response) {
                 if (response.includes("duplicate")) {
-                    alert("Email already exists!");
+                    alert("พบข้อมูลซ้ำ!");
+                } else {
+                    $('#addStudentModal').modal('hide');
+                    table.ajax.reload();
+                }
+            }
+        });
+    });
+    $('#PassStudentForm').submit(function(e) {
+        e.preventDefault();
+        var formData = $(this).serialize();
+        $.ajax({
+            url: 'actions/backend_pass.php',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                if (response.includes("duplicate")) {
+                    alert("พบข้อมูลซ้ำ!");
                 } else {
                     $('#addStudentModal').modal('hide');
                     table.ajax.reload();
@@ -183,6 +234,20 @@
             $('#phone_number').val(studentData.phone_number);
             $('#address').val(studentData.address);
             $('#addStudentModal').modal('show');
+        }
+    });
+  }
+  function editStudentPas(studentId) {
+    $('#PassstudentId').val(studentId);
+    $.ajax({
+        url: 'actions/fetch_student.php',
+        type: 'POST',
+        data: { studentId: studentId },
+        success: function(data) {
+            var studentData = JSON.parse(data);
+            $('#student_password').val(studentData.student_password);
+
+            $('#PassStudentModal').modal('show');
         }
     });
   }
